@@ -1,7 +1,10 @@
 const allPeddy = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/peddy/pets")
     const data = await res.json();
+    sorting(data)
     displayAllPeddy(data.pets)
+    // console.log(data.pets)
+    
 }
 
 const patDetails = async(id) => {
@@ -67,6 +70,21 @@ const addSidBarAnimalPic = (ani) => {
 
 }
 
+
+// sorting in price
+
+
+const sorting =(petData)=>{
+  document.getElementById("sortingPrice").addEventListener('click',()=>{
+    const sortedByPrice= petData.pets.sort((a, b) => (b.price || 0) - (a.price || 0));
+    displayAllPeddy(sortedByPrice)
+    console.log(petData)
+  })
+  
+} 
+
+
+
 const removeClass = ()=>{
  const removeActive = document.getElementsByClassName("btn-categori")
  for(let btn of removeActive){
@@ -98,7 +116,8 @@ const displayAllPeddy = (peddy) => {
     }
     animalContainer.classList.add("grid")
     peddy.forEach(item => {
-        // console.log(item.petId)
+        // console.log(item)
+        // sorting(item)
         const div = document.createElement("div")
 
         div.innerHTML = ` 
